@@ -46,6 +46,7 @@ router.post('/login', async (req: Request, res: Response) => {
     });
 
     res.json({
+      token,
       teacher: {
         id: teacher.id,
         name: teacher.name,
@@ -94,6 +95,7 @@ router.post('/signup', async (req: Request, res: Response) => {
     });
 
     res.json({
+      token,
       teacher: { id: teacher.id, name: teacher.name, email: teacher.email },
     });
   } catch (err) {

@@ -18,7 +18,11 @@ declare global {
 
 export function requireAuth(req: Request, res: Response, next: NextFunction): void {
   try {
-    const token = req.cookies?.token as string | undefined;
+    let token = req.cookies?.token as string | undefined;
+
+    if (!token && req.headers.authorization?.startsWith('Bearer ')) {
+      token = req.headers.authorization.split(' ')[1];
+    }
 
     if (!token) {
       res.status(401).json({ error: 'Authentication required' });
